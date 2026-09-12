@@ -6,6 +6,33 @@ Related documentation:
 - [Project Overview & Setup Guide](./README.md)
 - [Blog Authoring & Content Guide](./BLOG_GUIDE.md)
 
+## [1.5.1] - 2026-09-12
+
+### Changed
+- Upgraded **Astro** to `7.3.2` and `@astrojs/markdown-remark` to `7.3.1`.
+- Upgraded **Vitest** to `4.1.11`.
+
+### Security
+- Remediated all 16 Dependabot alerts across runtime and development dependencies, bringing `pnpm audit` to 0 vulnerabilities:
+  - **`sharp`**: Upgraded to `0.35.4` (fixes libheif RCE vulnerabilities GHSA-rgj7-g3m4-5g8c, CVE-2026-84383).
+  - **`astro`**: Upgraded to `7.3.2` (fixes RCE through AVIF image optimization GHSA-26w7-cxv4-gfx2).
+  - **`vitest` / `@vitest/mocker`**: Upgraded to `4.1.11` (fixes path traversal / arbitrary file read GHSA-82fw-gwwq-j7x9, CVE-2026-84373).
+  - **`smol-toml`**: Overridden to `1.7.2` (fixes infinite loop / DoS GHSA-7w5x-hrqm-74c2, CVE-2026-85730).
+  - **`svgo`**: Overridden to `4.1.0` (fixes script bypass and namespace bypass XSS GHSA-4vpr-x523-8j87, GHSA-w27v-7q3p-w38r).
+  - **`browserslist`**: Overridden to `4.28.9` (fixes prototype write / crash via custom stats GHSA-73wf-gq98-2v4g, CVE-2026-73088).
+  - **`baseline-browser-mapping`**: Overridden to `2.11.22` (fixes process termination DoS GHSA-w5vr-8v7q-w6rv, CVE-2026-45819).
+  - **`fast-uri`**: Overridden to `3.1.7` (fixes security vulnerabilities CVE-2026-31802).
+  - **`postcss-selector-parser`**: Scoped overrides for `@6` (`6.1.4`) and `@7` (`7.1.6`) (fixes uncontrolled AST recursion DoS GHSA-w9m9-85wc-3x92).
+  - **`js-yaml`**: Overridden to `4.3.2` (fixes CPU consumption DoS GHSA-2883-xcg3-v3hh).
+  - **`brace-expansion`**: Scoped overrides for `@1` (`1.1.18`) and `@5` (`5.0.9`) (fixes unbounded intermediate array DoS GHSA-mh99-v99m-4gvg, GHSA-rgw5-rvv9-x895).
+
+### Verification
+- `pnpm audit` reports 0 vulnerabilities.
+- `pnpm lint && pnpm typecheck && pnpm test && pnpm build` passed cleanly.
+
+### Infrastructure
+- Updated project version to `1.5.1`.
+
 ## [1.5.0] - 2026-08-23
 
 ### Added

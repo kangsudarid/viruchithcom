@@ -163,7 +163,7 @@ pnpm exec wrangler deploy
 
 The current site state includes:
 
-- current release version: **v1.5.0**
+- current release version: **v1.5.1**
 - portfolio redesign applied
 - markdown article publishing in place
 - Mermaid.js diagrams enabled in Markdown via `astro-mermaid`
