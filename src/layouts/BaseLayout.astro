@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
-import "katex/dist/katex.min.css";
+import manropeWoff2 from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
+import interWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 
 interface Props {
   title: string;
@@ -127,7 +128,8 @@ const resolvedTitle = isIndex
         <script type="application/ld+json" set:html={JSON.stringify(item)} />
       ))
     }
-    <link rel="preconnect" href="https://static.cloudflareinsights.com">
+    <link rel="preload" href={manropeWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interWoff2} as="font" type="font/woff2" crossorigin />
     <!-- Google Tag Manager is deferred to protect initial paint on mobile -->
     <style>
       #cat-widget-container {

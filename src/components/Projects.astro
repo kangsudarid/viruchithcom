@@ -118,10 +118,12 @@ const projects = [
                   href={p.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View source code for ${p.title} on GitHub`}
                 >
                   <span>goto</span>&nbsp;
                   <ExternalLink stroke-width={1.5} aria-hidden="true" />
                 </a>
+
               </span>
             ) : (
               <span class="inline-flex items-center font-medium text-on-surface-variant opacity-70">

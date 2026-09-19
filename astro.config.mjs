@@ -25,8 +25,9 @@ export default defineConfig({
     }),
   },
   build: {
-    inlineStylesheets: 'never',
+    inlineStylesheets: 'always',
   },
+
   devToolbar: {
     enabled: false,
   },

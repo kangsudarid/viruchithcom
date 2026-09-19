@@ -24,12 +24,16 @@ const { post, priority = false } = Astro.props;
         alt={post.heroAlt}
         width={720}
         height={450}
-        widths={[360, 540, 720, 960]}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        widths={[320, 480, 580, 720, 960]}
+        sizes="(max-width: 640px) 310px, (max-width: 1024px) 480px, 360px"
+        quality={80}
+        format="webp"
+        decoding="async"
         class="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
         loading={priority ? 'eager' : 'lazy'}
         data-card-img
       />
+
       <div class="absolute inset-x-0 top-0 flex items-center justify-between gap-3 p-4">
         <span class="chip" data-card-category>{post.category}</span>
         {(post.featured || post.slug === '') && (

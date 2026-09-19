@@ -1,0 +1,88 @@
+.article-prose {
+  @apply text-base leading-8 text-on-surface-variant md:text-lg;
+}
+
+  .article-prose :where(h2, h3, h4) {
+    @apply font-headline font-extrabold tracking-[-0.04em] text-on-background;
+  }
+
+  .article-prose :where(h2) {
+    @apply mt-14 text-3xl md:text-4xl;
+  }
+
+  .article-prose :where(h3) {
+    @apply mt-10 text-2xl;
+  }
+
+  .article-prose :where(p, ul, ol, blockquote, pre) {
+    @apply mt-6;
+  }
+
+  .article-prose :where(ul, ol) {
+    @apply space-y-3 pl-6;
+  }
+
+  .article-prose :where(ul) {
+    @apply list-disc;
+  }
+
+  .article-prose :where(ol) {
+    @apply list-decimal;
+  }
+
+  .article-prose :where(li)::marker {
+    @apply text-primary-container;
+  }
+
+  .article-prose :where(strong, code) {
+    @apply text-primary;
+  }
+
+  .article-prose :where(a) {
+    @apply text-primary-container underline decoration-primary-container/50 underline-offset-4;
+  }
+
+  .article-prose :where(blockquote) {
+    @apply rounded-r-2xl border-l-4 border-primary-container bg-surface-container-low px-6 py-5 text-on-surface;
+  }
+
+  .article-prose :where(pre) {
+    @apply overflow-x-auto rounded-2xl border border-outline-variant/15 bg-surface-container-lowest p-5 text-sm text-secondary;
+  }
+
+  .article-prose :where(code):not(pre code) {
+    @apply rounded bg-surface-container-high px-1.5 py-0.5 text-sm;
+  }
+
+  .article-prose :where(table) {
+    @apply w-full border-collapse;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .article-prose :where(th, td) {
+    @apply border border-outline-variant px-4 py-3 text-left;
+    min-width: 8rem;
+  }
+
+  .article-prose :where(th) {
+    @apply bg-surface-container font-semibold text-on-background;
+  }
+
+  .bordered-table {
+    @apply w-full border-collapse;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bordered-table th,
+  .bordered-table td {
+    @apply border border-outline-variant px-4 py-3 text-left;
+  }
+
+  .bordered-table th {
+    @apply bg-surface-container font-semibold text-on-background;
+  }
+

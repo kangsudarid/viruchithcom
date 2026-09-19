@@ -74,9 +74,9 @@ const itemListSchema = {
         class="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4"
         data-carousel-track
       >
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <div class="min-w-[86%] snap-start sm:min-w-[78%] md:min-w-[48%] lg:min-w-[32%]" data-carousel-slide>
-            <ArticleCard post={post} priority={index === 0} />
+            <ArticleCard post={post} priority={false} />
           </div>
         ))}
       </div>
@@ -86,11 +86,16 @@ const itemListSchema = {
           {posts.map((post, index) => (
             <button
               type="button"
-              class={`h-2.5 rounded-full transition-all ${index === 0 ? 'w-8 bg-primary-container' : 'w-2.5 bg-outline-variant/70'}`}
+              class="flex h-7 min-w-7 items-center justify-center p-1.5 focus:outline-none"
               aria-label={`Go to article ${index + 1}: ${post.title}`}
               data-carousel-dot
               data-index={index}
-            ></button>
+            >
+              <span
+                class={`h-2.5 rounded-full transition-all ${index === 0 ? 'w-8 bg-primary-container' : 'w-2.5 bg-outline-variant/70'}`}
+                data-dot-indicator
+              ></span>
+            </button>
           ))}
         </div>
 
@@ -134,10 +139,13 @@ const itemListSchema = {
         const activeIndex = Math.round(carouselTrack.scrollLeft / step);
         dots.forEach(function (dot, index) {
           const isActive = index === activeIndex;
-          dot.classList.toggle('w-8', isActive);
-          dot.classList.toggle('bg-primary-container', isActive);
-          dot.classList.toggle('w-2.5', !isActive);
-          dot.classList.toggle('bg-outline-variant/70', !isActive);
+          const indicator = dot.querySelector('[data-dot-indicator]');
+          if (indicator) {
+            indicator.classList.toggle('w-8', isActive);
+            indicator.classList.toggle('bg-primary-container', isActive);
+            indicator.classList.toggle('w-2.5', !isActive);
+            indicator.classList.toggle('bg-outline-variant/70', !isActive);
+          }
           dot.setAttribute('aria-current', isActive ? 'true' : 'false');
         });
       }
