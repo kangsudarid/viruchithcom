@@ -35,6 +35,59 @@ The Round-Trip Delay (δ) is calculated by subtracting the server's internal pro
 
 By assuming the network path is symmetric, the client simply divides $\delta$ by two to determine exactly how much latency to subtract from the server's timestamp.
 
+## The NTP Hierarchy: Understanding Strata
+
+Even if two machines can calculate Round-Trip Delay accurately, a fundamental question remains: **who decides what time it actually is?**
+
+If every computer on the internet queried national atomic clocks directly, those servers would instantly collapse under the load. To distribute traffic and guarantee resilience, NTP organizes time sources into a hierarchical, tiered architecture known as **Strata** (singular: *Stratum*).
+
+A stratum level represents the degree of separation (in network hops and synchronization layers) from the authoritative reference clock:
+
+```mermaid
+flowchart TD
+    S0["Stratum 0: Reference Clocks (Atomic Clocks, GPS, Radio)"]
+    S1["Stratum 1: Primary Time Servers"]
+    S2["Stratum 2: Secondary Time Servers (e.g., pool.ntp.org, Cloud NTP)"]
+    S3["Stratum 3: Enterprise & ISP Time Servers"]
+    S4["Stratum 4: End-User Devices (Laptops, Phones, Routers)"]
+
+    S0 -->|Direct Hardware Link: PPS / Serial / PCIe| S1
+    S1 -->|NTP over Network| S2
+    S2 -->|NTP over Network| S3
+    S3 -->|NTP over Network| S4
+```
+
+### Stratum 0: The Reference Clocks
+These are the ground-truth sources of time. Stratum 0 devices are high-precision physical hardware:
+- **Atomic clocks** (Cesium beam standards and Rubidium oscillators)
+- **GNSS / GPS satellites**
+- **Radio time broadcasts** (e.g., WWVB in the US, DCF77 in Germany)
+
+Crucially, **Stratum 0 devices are never connected directly to the internet.** Because they lack network interfaces and packet-processing stacks, they connect to a dedicated host computer via hardware interfaces like serial ports, PPS (Pulse Per Second) signals, or PCIe timing cards.
+
+### Stratum 1: Primary Time Servers
+A server physically wired to a Stratum 0 device is a **Stratum 1** server (also called a primary time server). These act as the gateway between raw physical clock signals and the packet-switched world. Their job is to serve authoritative timestamps with sub-millisecond precision to downstream systems across the network.
+
+### Stratum 2: The Workhorses of the Internet
+**Stratum 2** servers synchronize with one or more Stratum 1 servers across a network. These represent the bulk of publicly available NTP servers, such as those in the [NTP Pool Project](https://www.ntppool.org/) and cloud provider infrastructure (e.g., AWS Time Sync Service or Google Public NTP).
+
+Stratum 2 servers do not blindly mirror a single upstream clock. Instead, they query multiple Stratum 1 peers, running statistical algorithms (such as Marzullo's algorithm) to filter out network jitter and discard "falsetickers" (servers reporting inaccurate time).
+
+### Stratum 3 to 15: Cascading to the Edge
+Each subsequent hop increments the stratum number:
+- **Stratum 3** servers sync from Stratum 2 servers (often acting as central time hubs for corporate intranets or ISPs).
+- **Stratum 4** is typically where consumer laptops, smartphones, and IoT devices operate when syncing against local routers or corporate servers.
+
+NTP supports up to **Stratum 15**.
+
+### Stratum 16: The Out-of-Sync Indicator
+**Stratum 16** is a special designator. It does not represent an actual layer in the hierarchy; rather, it indicates that a device is **completely unsynchronized**—its clock has drifted, or all upstream time sources are currently unreachable. Any server reporting Stratum 16 is rejected by downstream clients.
+
+### Why Strata Matter: Scale and Loop Prevention
+The stratum model accomplishes two vital goals in distributed networks:
+1. **Load Distribution:** Billions of internet-connected devices can stay synchronized without overwhelming the world's primary time standards.
+2. **Loop Prevention:** NTP packets carry the stratum number and the reference identifier of their upstream source. If server A syncs from server B, server B will never accept time from server A, preventing destructive feedback loops.
+
 ## Accuracy: Milliseconds vs. Microseconds
 While the math behind Round-Trip Delay is elegant, its real-world accuracy depends entirely on the stability of your network:
 
