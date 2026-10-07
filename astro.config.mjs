@@ -4,6 +4,7 @@ import { unified } from '@astrojs/markdown-remark';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import mermaid from 'astro-mermaid';
+import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://viruchith.com',
@@ -17,6 +18,7 @@ export default defineConfig({
       theme: 'dark',
       autoTheme: true,
     }),
+    mdx(),
   ],
   markdown: {
     processor: unified({

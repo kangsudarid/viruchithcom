@@ -1,0 +1,215 @@
+---
+title: "Beneath the waves, before the light: how copper connected the world"
+description: "How did humanity connect continents before the internet? A look at the history, failures, and engineering of undersea copper cables."
+publishDate: 2026-10-07
+category: "History"
+tags:
+  - "Undersea Cables"
+  - "Telegraph"
+  - "History"
+  - "Engineering"
+  - "TAT-14 Cable"
+  - "Transatlantic Telegraph Cables"
+heroImage: ../../assets/blog/beneath-the-waves-before-the-light-how-copper-connected-the-world-cover.png
+heroAlt: "Illustration of transatlantic telegraph cables"
+featured: false
+draft: false
+---
+import { Image } from 'astro:assets';
+import fishermanCutCableIllustration from '../../assets/blog/french-fisherman-cut-cable-illustration.png';
+import telegraphEngineersIllustraiton from '../../assets/blog/telegraph-engineers-illustration.png';
+import costlyCallIllustration from '../../assets/blog/costly-call-illustration.png';
+import tasiCallIllustration from '../../assets/blog/tasi-call-illustration.png';
+import cableRepairIllustration from '../../assets/blog/cable-repair-illustration.png';
+import copperToFiberIllustration from '../../assets/blog/copper-to-fiber-illustration.png';
+import copperToFiberEvolutionIllustration from '../../assets/blog/copper-to-fiber-evolution-illustration.png';
+
+Last Tuesday, I deployed microservices spanning from India to North America in real time. A few lines of YAML, an API call, and global traffic routed across hemispheres in milliseconds, with redundant infrastructure absorbing failures automatically.
+
+Working in telecom software, I usually treat the physical world as an abstraction. To me, "the network" mostly means REST APIs, YAML configs, and light moving through fiber optic glass.
+
+During lunch that day, I stopped in front of a map in our office lobby showing submarine fiber infrastructure. It struck me that while I write software to manage global traffic, I had never looked into how humanity communicated across oceans before fiber existed. How did anyone send a human voice across nearly 5,000 kilometers of ocean using only copper?
+
+I spent the evening reading through the history. The story behind those early undersea links is full of strange failures, brute-force experiments, and clever engineering workarounds that established the routes modern networks still use.
+
+---
+
+## 1. The telegraph era: a thread across the abyss
+
+In the 1840s, sending an urgent message from London to New York required a wooden sailing ship. Packet loss meant a shipwreck, and round-trip latency was about six weeks.
+
+When Samuel Morse and other inventors demonstrated the electric telegraph on land, copper wires strung on poles along railway tracks carried messages faster than any train. Engineers soon looked at the English Channel and the Atlantic Ocean and asked a simple question: why not lay the wire across the seabed?
+
+They quickly ran into basic physics: seawater conducts electricity. An uninsulated copper wire dropped into the ocean leaked its electrical signal directly into the water. Rubber, the common land insulator of the time, degraded quickly in saltwater.
+
+The solution came from Southeast Asia. In the 1840s, colonial engineers brought **gutta-percha**, the natural latex sap of the *Palaquium gutta* tree, to Europe. When boiled in water, gutta-percha became soft and moldable; when cooled, it hardened into a tough, water-resistant material that held up well under cold temperatures and high pressure on the sea floor.
+
+In 1850, brothers John and Jacob Brett laid a copper wire coated in gutta-percha across the English Channel. It worked for about a day, until a French fisherman snagged the line with his anchor, hauled it up, and cut a section off thinking he had found seaweed filled with gold. The engineers armored the next cable with iron wire, establishing the first lasting international telegraph link.
+
+<Image src={fishermanCutCableIllustration} alt="French fisherman cut cable illustration" style={{ marginBottom: "0.5rem", marginTop: "1rem" }} />
+
+---
+
+### The impossible Atlantic
+
+Crossing 30 kilometers of the English Channel was relatively straightforward compared to the North Atlantic, which spanned roughly 3,700 kilometers.
+
+In the 1850s, American businessman Cyrus West Field partnered with British engineers to form the Atlantic Telegraph Company. Because no single ship could carry 4,000 kilometers of armored copper cable, they split the load between two naval warships, the USS *Niagara* and the HMS *Agamemnon*. The ships met in the middle of the Atlantic, spliced the cable ends together, and steamed in opposite directions.
+
+An 1857 attempt failed when the cable snapped in deep water. A second attempt in early 1858 ran into a storm that nearly sank the *Agamemnon*. In August 1858, they completed the run. Queen Victoria sent a 98-word congratulatory telegram to US President James Buchanan.
+
+The celebration was short-lived. Over 3,200 kilometers of undersea copper, electrical pulses distorted heavily. The cable behaved like a very long garden hose: turning a tap on and off quickly at one end does not produce sharp spurts at the other, but rather a slow, smeared trickle. Queen Victoria's 98-word message took 16 hours and 30 minutes to transmit, averaging more than ten minutes per word.
+
+Chief electrician Wildman Whitehouse believed the solution was higher voltage. Physicist William Thomson (later Lord Kelvin) had developed a sensitive mirror galvanometer to detect tiny electrical currents by reflecting a light beam off a small magnet, but Whitehouse bypassed it. He raised the voltage to roughly 2,000 volts using massive induction coils. Within weeks, the high voltage burned through the gutta-percha insulation, and the cable failed permanently.
+
+A reliable connection arrived in 1866. Using Isambard Kingdom Brunel's SS *Great Eastern*, then the largest steamship in the world, engineers laid a thicker, better-insulated cable that held up. For the first time, financial markets in London and New York could exchange information in minutes instead of weeks.
+
+<Image src={telegraphEngineersIllustraiton} alt="Telegraph engineers illustration" style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }} />
+
+---
+
+## 2. The telephone era: why voice took decades longer
+
+By the start of the 20th century, copper telegraph cables linked Britain, the Americas, and Asia. Yet for decades after Alexander Graham Bell patented the telephone in 1876, transatlantic phone calls remained impossible.
+
+If copper wire could carry Morse code across an ocean, why not voice?
+
+The core issue was bandwidth and signal loss. Morse code acts like a low-frequency 1-bit digital signal running at a few pulses per second. Human voice, by contrast, is a continuous analog wave vibrating thousands of times per second. When high-frequency voice signals pass through a copper cable immersed in seawater, the surrounding water absorbs electrical energy through capacitance. Over 50 to 65 kilometers, the voice signal decays until it disappears beneath background thermal noise.
+
+On land, telephone operators solved this attenuation in the early 1900s by placing vacuum-tube amplifiers (repeaters) in huts every 80 kilometers along telephone lines. Over the ocean, that was not yet possible. When transatlantic telephone service finally launched in 1927 between New York and London, it used shortwave radio rather than undersea cables.
+
+Radio telephone service in the 1930s and 1940s was unreliable. Because shortwave signals bounced off the ionosphere, call quality fluctuated with solar activity, weather, and the time of day. Audio faded frequently, atmospheric static interfered with conversations, and anyone with a shortwave receiver could listen in. The available radio spectrum across the North Atlantic could also only carry a few calls simultaneously.
+
+---
+
+## 3. The submarine telephone revolution: putting vacuum tubes on the ocean floor
+
+To carry reliable telephone conversations across the Atlantic, engineers had to place amplifiers directly onto the seabed.
+
+In the 1940s and 1950s, amplification relied on vacuum tubes: fragile glass bulbs that ran hot and regularly burned out after a few years. Submerged repeaters required sealing dozens of these tubes in steel housings, submerging them under nearly 5,000 meters of seawater at pressures topping 41 megapascals (roughly 400 bar), and powering them with thousands of volts sent through the copper conductor itself. Because retrieving a deep-sea cable to replace a failed component cost millions of dollars, the repeaters had to function without maintenance for twenty years.
+
+Bell Labs and the British Post Office spent years engineering solutions to these reliability problems. Technicians manufactured vacuum tubes in cleanrooms, inspecting every weld under X-ray. In 1933, British chemists synthesized **polyethylene**, an insulating plastic that replaced gutta-percha and prevented high-frequency signals from leaking into the water.
+
+These efforts culminated in **TAT-1** (Transatlantic No. 1), laid between Scotland and Newfoundland in 1956.
+
+TAT-1 relied on two coaxial copper cables, one for each direction of speech. Spliced into the line every 68 kilometers were 51 flexible, torpedo-shaped repeaters engineered to pass through cable-laying gear. When service opened on September 25, 1956, the system supported 36 simultaneous telephone calls. While modest by modern standards, 36 clear voice circuits represented a major technical leap over shortwave radio.
+
+### Calling overseas in the 1950s
+
+In the mid-20th century, making an international phone call required planning. Callers could not dial direct; they booked a time slot through an international operator hours or days in advance.
+
+When the operator connected the circuit, time was limited. A three-minute weekday call from New York to London on TAT-1 cost $12, roughly $135 adjusted for inflation (around $45 per minute). Callers kept conversations brief and watched the clock closely. High costs meant people generally reserved overseas calls for emergencies, major family milestones, or high-value business transactions.
+
+<Image src={costlyCallIllustration} alt="Costly call illustration" style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }} />
+
+---
+
+## 4. Scaling copper: engineering around capacity limits
+
+Once TAT-1 proved undersea repeaters worked in practice, traffic grew rapidly. To expand capacity from 36 circuits in 1956 to more than 4,000 by the late 1970s, engineers had to solve problems across signal loss, bandwidth, cost, and physical damage.
+
+### Multiplexing thousands of calls onto one conductor
+
+Carrying thousands of calls across a single copper line required **Frequency-Division Multiplexing (FDM)**.
+
+Human speech requires an audio bandwidth of only about 3 to 4 kilohertz to remain clear and recognizable. Shore terminals modulated each call onto a distinct carrier frequency band. Call 1 occupied the base frequency band, Call 2 sat just above it, Call 3 above that, and so on, packing hundreds or thousands of channels side by side across the cable's electrical bandwidth. At the receiving terminal, analog bandpass filters separated each frequency band back into its original audio range.
+
+### Reclaiming silence with TASI
+
+In 1960, Bell Labs introduced **TASI** (*Time Assignment Speech Interpolation*).
+
+In typical two-way telephone conversations, one party listens while the other speaks, and speakers pause between words and phrases. A telephone channel was silent more than 60 percent of the time.
+
+Given the construction cost of subsea systems, leaving lines idle during pauses was inefficient. TASI monitored voice activity on terminal lines millisecond by millisecond. When a caller paused, terminal switches assigned the underlying physical channel to another active speaker. When the original caller resumed speaking, the system reassigned them to any channel that had just freed up. TASI effectively doubled the operational voice capacity of existing cables without laying extra copper. (From a software perspective, this behaves much like dynamic resource allocation and CPU oversubscription.)
+
+<Image src={tasiCallIllustration} alt="Tasi call illustration" style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }} />
+
+---
+
+### The coaxial era (TAT-3 to TAT-7)
+
+Through the 1960s and 1970s, two developments drove capacity increases: solid-state transistors replaced vacuum tubes, and coaxial cables grew thicker.
+
+Transistors supported higher amplification frequencies than vacuum tubes, allowing engineers to pack wider frequency bands into each cable. Higher frequencies, however, attenuate more quickly over distance. To counter this, cables grew from 15 millimeters in diameter on TAT-1 to roughly 50 millimeters on 1970s systems, and repeaters had to be placed closer together.
+
+When **TAT-6** (1976) and **TAT-7** (1983) launched, they marked the peak of analog copper design. Repeaters were spaced every 9.4 kilometers across the Atlantic, requiring nearly 700 undersea amplifiers working in series to support more than 4,000 simultaneous calls.
+
+### Dealing with trawlers, anchors, and breaks
+
+Most cable damage occurred on shallow continental shelves, where commercial fishing trawlers dragged heavy metal nets across the sea floor and snapped lines.
+
+To protect the cables, operators developed sea plows towed by ships to trench and bury cables under seabed sediment in shallow waters. When breaks occurred in deep ocean water, repair ships used time-domain reflectometry and electrical resistance tests from shore stations to locate the fault, often to within 1.5 kilometers. The ship navigated to the coordinates, lowered a multi-pronged grappling hook on steel wire, dragged the seabed until it caught the line, hoisted the cable to the surface, spliced in replacement sections on deck, and lowered the repaired line back to the bottom.
+
+<Image src={cableRepairIllustration} alt="Cable repair illustration" style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }} />
+
+---
+
+## 5. Capacity and cost across the decades
+
+From the first Atlantic telegraph to early fiber optics, capacity grew steadily, driven by developments in materials chemistry, metallurgy, and analog electronics.
+
+### Table 1: Undersea cable capacity over time
+
+| Period | System / Era | Core Technology | Approximate Capacity |
+| --- | --- | --- | --- |
+| **1858** | First Atlantic Cable | Gutta-percha insulated copper wire | **0.1 words per minute** (1 message took hours) |
+| **1866-1920s** | Classic Telegraph Era | Improved copper core + duplex signaling | **15 to 400 words per minute** (Text only, zero voice) |
+| **1956** | **TAT-1** (First Voice Cable) | Coaxial copper + 51 vacuum-tube repeaters | **36 simultaneous phone calls** |
+| **1963** | **TAT-3** | Single-tube armorless coax + vacuum tubes | **128 simultaneous phone calls** |
+| **1970** | **TAT-5** | Coaxial copper + solid-state transistor repeaters | **845 simultaneous phone calls** |
+| **1976-1983** | **TAT-6 & TAT-7** (Peak Copper) | Wide-diameter coax + repeaters every ~9 km | **4,000 to 4,200 simultaneous phone calls** (over 8,000 with TASI) |
+| **1988** | **TAT-8** (First Fiber Cable) | Laser diodes + single-mode glass optical fiber | **40,000 simultaneous phone calls** (280 Mbps) |
+| **2020s** | **Modern Subsea Fiber** (e.g., Dunant, Amitié) | Space-division multiplexing + optical amplifiers | **250 to 400+ Terabits per second** (Hundreds of millions of calls/streams) |
+
+---
+
+### Table 2: The cost of a 3-minute call (New York to London)
+
+The dropping price of transatlantic communication illustrates how infrastructure scale lowered the barrier to international calls:
+
+| Decade | Technology Used | Price for a 3-Minute Call (At the Time) | Modern Equivalent (Inflation-Adjusted) | Practical Usage |
+| --- | --- | --- | --- | --- |
+| **1920s (1927)** | Early Transatlantic Radio | **$75.00** | **~$1,300+** | Limited largely to government officials and major financial institutions. |
+| **1930s-1940s** | Shortwave Radio Telephone | **$21.00 - $45.00** | **~$450 - $900** | Subject to heavy static and reserved mostly for urgent personal or business matters. |
+| **1950s (1956)** | **TAT-1** Submarine Copper | **$12.00** ($9 nights/Sundays) | **~$135** | Clear audio, but strictly rationed by families due to per-minute cost. |
+| **1970s** | **TAT-5 / TAT-6** Coaxial Copper | **$5.40 - $6.75** | **~$35 - $45** | More accessible for household use; Direct Distance Dialing introduced. |
+| **1980s** | Late Coaxial / Early Fiber (**TAT-8**) | **$3.00 - $4.00** | **~$9 - $12** | Routine for businesses and practical for regular personal calls. |
+| **Today** | Modern Subsea Optical Fiber | **~$0.00** (Included in data plan) | **$0.00** | Effectively zero marginal cost over internet connections. |
+
+---
+
+## 6. The fiber optic transition: why copper reached its limit
+
+When TAT-7 entered service across the Atlantic in 1983, coaxial copper had reached practical physical and economic limits.
+
+Because transmitting higher call volumes required higher frequencies, and higher frequencies suffered steeper attenuation in copper, TAT-7 required repeaters every 9.4 kilometers, totaling nearly 700 units across the route. Doubling capacity further would have required repeaters every three kilometers and a coaxial core so thick and stiff that cable ships could neither store nor lay it easily. Supplying electrical power to thousands of submerged amplifiers across thousands of kilometers also presented severe engineering hurdles.
+
+Optical fiber changed the baseline physics. Instead of transmitting electrical currents through metal conductors, where resistance and capacitance cause high signal loss, optical systems transmit pulses of light through strands of silica glass.
+
+Light pulses travel dozens of kilometers through low-loss silica glass before requiring amplification, and optical signals remain unaffected by electromagnetic interference from surrounding seawater. When **TAT-8**, the first transatlantic fiber-optic cable, went live in 1988, it required repeaters only every 50 kilometers instead of every 9. It carried 40,000 phone circuits, roughly ten times the capacity of the highest-capacity copper cable, within an outer diameter of under 25 millimeters.
+
+Traffic filled TAT-8 within 18 months. Over the following decade, operators decommissioned transatlantic copper systems in favor of fiber-optic cables.
+
+<Image src={copperToFiberIllustration} alt="Copper to fiber illustration" style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }} />
+
+---
+
+## 7. The infrastructure before optical fiber
+
+Discussions about global networks often begin with ARPANET in 1969 or the World Wide Web in 1991, but worldwide telecommunications operated on copper for over 130 years.
+
+From the late 19th century through the late 20th century, transoceanic communications ran over subsea copper conductors. Commercial news services like the Associated Press, intercontinental banking transfers, and diplomatic communications all traveled as electrical signals over submarine telegraph and coaxial cables.
+
+The Washington-Moscow hotline established in 1963 following the Cuban Missile Crisis is one example. Rather than the red telephone depicted in films, the primary link was a duplex teletype circuit routed across the Atlantic via the **TAT-2** coaxial cable to Europe, then overland to Moscow. During the 1969 Apollo 11 mission, telemetry and television feeds between NASA tracking stations and mission control relied on the subsea coaxial network to transmit data between continents.
+
+Well before TCP/IP and modern cloud infrastructure, subsea copper enabled international flight reservations, cross-border financial settlements, and commercial telephone services across the Atlantic and Pacific.
+
+<Image src={copperToFiberEvolutionIllustration} alt="Copper to fiber evolution illustration" style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }} />
+
+---
+
+## Conclusion: the physical foundation of modern networking
+
+The next time I look at the cable map in our office lobby or deploy services across regions, the infrastructure behind those commands feels less abstract.
+
+Modern fiber optics and automated routing can make global data delivery seem instantaneous and self-sustaining. The routes our data takes today, however, largely follow the physical paths surveyed and laid during the telegraph and telephone eras. From gutta-percha insulation and vacuum-tube repeaters to speech interpolation and subsea plowing, the mechanical and electrical challenges solved by copper engineers established the foundation that modern optical networks still rely on.

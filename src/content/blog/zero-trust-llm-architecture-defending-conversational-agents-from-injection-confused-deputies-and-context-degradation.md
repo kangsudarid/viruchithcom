@@ -15,7 +15,7 @@ tags:
   - "MCP"
   - "Chat Compaction"
 heroImage: ../../assets/blog/zero-trust-llm-architecture-defending-conversational-agents-from-injection-confused-deputies-and-context-degradation.png
-heroAlt: "Diagram showing a bus stop announcement system with GPS multipath jitter and opposing-lane ambiguities."
+heroAlt: "Illustration of a secure enterprise LLM Architecture"
 featured: false
 draft: false
 ---
