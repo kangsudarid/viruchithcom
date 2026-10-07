@@ -1,4 +1,4 @@
-name = "viruchith-com"
+name = "viruchithcom"
 compatibility_date = "2026-04-19"
 [assets]
 directory = "./dist"
