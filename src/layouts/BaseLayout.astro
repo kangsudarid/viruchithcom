@@ -9,6 +9,11 @@ interface Props {
   ogImage?: string;
   ogType?: "website" | "article";
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+  preloadImage?: {
+    src: string;
+    srcset?: string;
+    sizes?: string;
+  };
 }
 
 const {
@@ -17,6 +22,7 @@ const {
   ogImage,
   ogType = "website",
   structuredData,
+  preloadImage,
 } = Astro.props;
 const canonical = new URL(
   Astro.url.pathname,
@@ -130,6 +136,18 @@ const resolvedTitle = isIndex
     }
     <link rel="preload" href={manropeWoff2} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={interWoff2} as="font" type="font/woff2" crossorigin />
+    {
+      preloadImage && (
+        <link
+          rel="preload"
+          as="image"
+          href={preloadImage.src}
+          imagesrcset={preloadImage.srcset}
+          imagesizes={preloadImage.sizes}
+          fetchpriority="high"
+        />
+      )
+    }
     <!-- Google Tag Manager is deferred to protect initial paint on mobile -->
     <style>
       #cat-widget-container {

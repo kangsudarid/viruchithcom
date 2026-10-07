@@ -1,6 +1,6 @@
 ---
 import { ArrowLeft, CalendarDays, Clock3 } from '@lucide/astro';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { render } from 'astro:content';
 import type { BlogEntry } from '../../lib/blog';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -35,6 +35,18 @@ const relatedPosts = (await getAllBlogPosts())
 const title = `${article.title} | Viruchith Ganesan`;
 const description = article.description;
 const articleUrl = `https://viruchith.com/articles/${article.slug}/`;
+
+const heroImageSizes = '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px';
+const heroImageWidths = [360, 480, 720, 960, 1200, 1600];
+
+const optimizedHero = await getImage({
+  src: article.heroImage,
+  widths: heroImageWidths,
+  sizes: heroImageSizes,
+  format: 'webp',
+  quality: 80,
+});
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -65,6 +77,11 @@ const structuredData = {
   ogType="article"
   ogImage={article.heroImage.src}
   structuredData={structuredData}
+  preloadImage={{
+    src: optimizedHero.src,
+    srcset: optimizedHero.srcSet.attribute,
+    sizes: heroImageSizes,
+  }}
 >
   <a href="#main" class="skip-to-content">Skip to content</a>
   <SiteHeader />
@@ -118,8 +135,14 @@ const structuredData = {
         <Image
           src={article.heroImage}
           alt={article.heroAlt}
-          class="aspect-[16/9] w-full object-cover"
+          widths={heroImageWidths}
+          sizes={heroImageSizes}
+          quality={80}
+          format="webp"
           loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          class="aspect-[16/9] w-full object-cover"
         />
       </div>
 
